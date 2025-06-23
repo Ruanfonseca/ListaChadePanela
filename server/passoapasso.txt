@@ -1,0 +1,9 @@
+
+#criando o build
+docker build -t ruanfonseca/lista:latest .
+
+#faça o login
+docker login -u ruanfonseca2023
+
+#faça o push
+docker push ruanfonseca2023/lista:latest

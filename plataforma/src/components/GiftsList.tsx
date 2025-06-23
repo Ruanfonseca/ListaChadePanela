@@ -8,9 +8,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift as GiftIcon, Plus, Trash2, FileText, MapPin, Calendar, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { categories, Gift } from '@/data/gifts';
+import ModalInfo from './ModalInfo';
 
 const GiftsList = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [showInfoModal, setShowInfoModal] = useState(true);
+  const [pendingGiftData, setPendingGiftData] = useState<{
+  giftId: number;
+  name: string;
+  whatsapp: string;
+} | null>(null);
+
   const [giftsList, setGiftsList] = useState<Gift[]>([]);
   const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,43 +38,47 @@ const GiftsList = () => {
 
 
    useEffect(() => {
-  console.log('🔄 Buscando lista de presentes...');
-  fetch(`${import.meta.env.VITE_PROD}/gifts`)
-    .then(res => res.json())
-    .then(data => {
-      console.log('🎁 Lista de presentes carregada:', data);
-      setGiftsList(data);
-    })
-    .catch(err => console.error('❌ Erro ao carregar presentes:', err));
+    fetch(`${import.meta.env.VITE_PROD}/gifts`)
+      .then(res => res.json())
+      .then(data => {
+        setGiftsList(data);
+      })
+      .catch(err => console.error('❌ Erro ao carregar presentes:', err));
 }, []);
 
 
 
   const handleChooseGift = (gift: Gift) => {
-  console.log('🎯 Presente selecionado:', gift);
   setSelectedGift(gift);
   setIsModalOpen(true);
 };
 
-const sendWhatsAppMessage = (gift: Gift, name: string, whatsapp: string) => {
+   const sendWhatsAppMessage = (gift: Gift, name: string, whatsapp: string) => {
   const message = `🎁 *Novo presente escolhido para o Chá de Panela do Ruan & Marcelly!*
 
-*Presente:* ${gift.name}
-*Escolhido por:* ${name}
-*WhatsApp:* ${whatsapp}
-*Data:* ${new Date().toLocaleDateString('pt-BR')}
+      *Presente:* ${gift.name}
+      *Escolhido por:* ${name}
+      *WhatsApp:* ${whatsapp}
+      *Data:* ${new Date().toLocaleDateString('pt-BR')}
 
-_Mensagem enviada automaticamente pelo sistema de presentes._`;
+      _Mensagem enviada automaticamente pelo sistema de presentes._`;
 
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/5521969232991?text=${encodedMessage}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/5521969232991?text=${encodedMessage}`;
 
-  console.log('📤 Enviando mensagem para WhatsApp:', whatsappUrl);
-  window.open(whatsappUrl, '_blank');
+        window.open(whatsappUrl, '_blank');
+      };
+
+const handleConfirmGift = (giftId: number, name: string, whatsapp: string) => {
+  setShowInfoModal(true);
+  setPendingGiftData({ giftId, name, whatsapp });
 };
 
+const finalizeGiftConfirmation = async () => {
+  if (!pendingGiftData) return;
 
- const handleConfirmGift = async (giftId: number, name: string, whatsapp: string) => {
+  const { giftId, name, whatsapp } = pendingGiftData;
+
   try {
     const res = await fetch(`${import.meta.env.VITE_PROD}/gifts/${giftId}/choose`, {
       method: 'PATCH',
@@ -85,12 +97,15 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
     sendWhatsAppMessage(updatedGift, name, whatsapp);
   } catch (err) {
     console.error(err);
+  } finally {
+    setShowInfoModal(false);
+    setPendingGiftData(null);
   }
 };
 
 
+
  const handleAdminAction = (action: 'add' | 'delete' | 'print') => {
-  console.log('🛠 Ação do admin:', action);
   setAdminAction(action);
   if (isAuthenticated) {
     executeAdminAction(action);
@@ -101,7 +116,6 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
 
 
  const executeAdminAction = (action: 'add' | 'delete' | 'print') => {
-  console.log('🚀 Executando ação do admin:', action);
   switch (action) {
     case 'add':
       setIsAddModalOpen(true);
@@ -120,7 +134,6 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
 
 
   const handleAuthSuccess = () => {
-  console.log('🔐 Autenticação de admin bem-sucedida');
   setIsAuthenticated(true);
   if (adminAction) {
     executeAdminAction(adminAction);
@@ -128,7 +141,6 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
 };
 
 const handleAddGift = async (newGift: Omit<Gift, 'id'>) => {
-  console.log('➕ Adicionando novo presente:', newGift);
   try {
     const res = await fetch(`${import.meta.env.VITE_PROD}/gifts`, {
       method: 'POST',
@@ -137,7 +149,6 @@ const handleAddGift = async (newGift: Omit<Gift, 'id'>) => {
     });
 
     const savedGift = await res.json();
-    console.log('🎁 Presente salvo:', savedGift);
     setGiftsList(prev => [...prev, savedGift]);
   } catch (err) {
     console.error('❌ Erro ao adicionar presente:', err);
@@ -146,7 +157,6 @@ const handleAddGift = async (newGift: Omit<Gift, 'id'>) => {
 
 
 const handleDeleteGift = async (giftId: number) => {
-  console.log('🗑 Excluindo presente:', giftId);
   if (!isAuthenticated) {
     handleAdminAction('delete');
     return;
@@ -173,7 +183,6 @@ const handleDeleteGift = async (giftId: number) => {
 
 
  const printChosenGifts = () => {
-  console.log('🖨 Imprimindo lista de presentes escolhidos...');
   const chosenGifts = giftsList.filter(gift => !gift.available);
   const printContent = chosenGifts.map(gift => 
     `${gift.name} - Escolhido por: ${gift.chosenBy}`
@@ -204,7 +213,6 @@ const handleDeleteGift = async (giftId: number) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cha-cream to-cha-beige py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <GiftIcon className="text-cha-terracota" size={32} />
@@ -212,7 +220,6 @@ const handleDeleteGift = async (giftId: number) => {
             <GiftIcon className="text-cha-terracota" size={32} />
           </div>
           
-          {/* Event Details */}
           <div className="bg-white p-6 rounded-2xl shadow-lg mb-6 border border-cha-sage/20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-cha-brown">
               <div className="flex items-center justify-center gap-2">
@@ -248,7 +255,6 @@ const handleDeleteGift = async (giftId: number) => {
           </div>
         </div>
 
-        {/* Admin buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-8">
           <Button
             onClick={() => handleAdminAction('add')}
@@ -275,7 +281,6 @@ const handleDeleteGift = async (giftId: number) => {
           </Button>
         </div>
 
-        {/* Category filters - Only 3 buttons */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map(category => (
             <Button
@@ -293,7 +298,6 @@ const handleDeleteGift = async (giftId: number) => {
           ))}
         </div>
 
-        {/* Color palette section */}
         <div className="bg-cha-brown text-white p-6 rounded-2xl mb-8 shadow-lg">
           <h3 className="text-xl font-bold mb-4">Paleta de cores</h3>
           <p className="mb-4">
@@ -327,9 +331,7 @@ const handleDeleteGift = async (giftId: number) => {
           </div>
         </div>
 
-        {/* Lists in cards - Always showing both cards with filtered content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Available gifts card */}
           <Card className="bg-white border-cha-sage shadow-lg">
             <CardHeader className="bg-cha-sage/10 border-b border-cha-sage/20">
               <CardTitle className="text-cha-brown flex items-center gap-2">
@@ -374,7 +376,6 @@ const handleDeleteGift = async (giftId: number) => {
             </CardContent>
           </Card>
 
-          {/* Unavailable gifts card */}
           <Card className="bg-white border-cha-terracota shadow-lg">
             <CardHeader className="bg-cha-terracota/10 border-b border-cha-terracota/20">
               <CardTitle className="text-cha-brown flex items-center gap-2">
@@ -396,7 +397,7 @@ const handleDeleteGift = async (giftId: number) => {
                         <h4 className="font-semibold text-cha-brown">{gift.name}</h4>
                         <p className="text-sm text-cha-sage">Escolhido por: {gift.chosenBy}</p>
                         {gift.chosenByWhatsApp && (
-                          <p className="text-xs text-cha-brown">WhatsApp: {gift.chosenByWhatsApp}</p>
+                          <p className="text-xs text-cha-brown">WhatsApp: (021) ----- ----</p>
                         )}
                       </div>
                     </div>
@@ -438,6 +439,37 @@ const handleDeleteGift = async (giftId: number) => {
         onClose={() => setIsAddModalOpen(false)}
         onAdd={handleAddGift}
       />
+      
+      <ModalInfo
+        isOpen={showInfoModal}
+        onClose={() => setShowInfoModal(false)}
+        onConfirm={finalizeGiftConfirmation}
+      />
+
+
+
+       <footer className="mt-16 border-t border-cha-sage/20 pt-6 text-center text-sm text-cha-brown">
+            <p>
+              Com carinho, Ruan & Marcelly 💕
+            </p>
+            <p className="mt-1 text-cha-sage">
+              Sistema de Presentes | Desenvolvido com 💻 e ☕ por
+              <a
+                href="https://quedsoftoficial.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline ml-1 hover:text-cha-terracota transition-colors"
+              >
+                QuedSoft
+              </a>
+            </p>
+            <p className="mt-1 text-cha-sage">CNPJ: 57.384.148/0001-94</p>
+            <p className="mt-1">
+              © {new Date().getFullYear()} Todos os direitos reservados
+            </p>
+          </footer>
+
+
     </div>
   );
 };

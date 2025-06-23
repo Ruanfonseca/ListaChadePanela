@@ -14,7 +14,6 @@ app.use('/gifts', giftRoutes);
 // Conexão com o banco + sync
 sequelize.authenticate()
   .then(() => {
-    console.log('Conectado ao banco de dados com sucesso!');
     return sequelize.sync(); 
   })
   .then(() => {

@@ -22,7 +22,7 @@ const AddGiftModal: React.FC<AddGiftModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('image');
   const { toast } = useToast();
 
   const categories = ["Cozinha", "Mesa e Jantar", "Casa e Decoração", "Eletrodomésticos", "Limpeza"];
@@ -106,20 +106,6 @@ const AddGiftModal: React.FC<AddGiftModalProps> = ({
             </Select>
           </div>
 
-          <div>
-            <Label htmlFor="image" className="text-cha-brown font-medium">
-              Emoji/Ícone
-            </Label>
-            <Input
-              id="image"
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="Ex: 🍳"
-              className="border-cha-sage/50 focus:border-cha-sage mt-2"
-              required
-            />
-          </div>
 
           <div className="flex gap-3 pt-4">
             <Button
