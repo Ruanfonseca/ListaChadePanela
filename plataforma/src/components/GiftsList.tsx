@@ -5,10 +5,11 @@ import AdminAuthModal from './AdminAuthModal';
 import AddGiftModal from './AddGiftModal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gift as GiftIcon, Plus, Trash2, FileText, MapPin, Calendar, Clock } from 'lucide-react';
+import { Gift as GiftIcon, Plus, Trash2, FileText, MapPin, Calendar, Clock, Car } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { categories, Gift } from '@/data/gifts';
 import ModalInfo from './ModalInfo';
+import { callUber } from '@/service/uber';
 
 const GiftsList = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -26,7 +27,15 @@ const GiftsList = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [adminAction, setAdminAction] = useState<'add' | 'delete' | 'print' | null>(null);
+  const [loadingAvailable, setLoadingAvailable] = useState(true);
+  const [loadingUnavailable, setLoadingUnavailable] = useState(true);
   const { toast } = useToast();
+
+  const Spinner = () => (
+  <div className="flex justify-center items-center py-10">
+    <div className="w-6 h-6 border-4 border-cha-sage border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
   const filteredGifts = selectedCategory === 'Todos' 
     ? giftsList 
@@ -38,13 +47,18 @@ const GiftsList = () => {
 
 
    useEffect(() => {
-    fetch(`${import.meta.env.VITE_PROD}/gifts`)
-      .then(res => res.json())
-      .then(data => {
-        setGiftsList(data);
-      })
-      .catch(err => console.error('❌ Erro ao carregar presentes:', err));
+  fetch(`${import.meta.env.VITE_PROD}/gifts`)
+    .then(res => res.json())
+    .then(data => {
+      setGiftsList(data);
+    })
+    .catch(err => console.error('❌ Erro ao carregar presentes:', err))
+    .finally(() => {
+      setLoadingAvailable(false);
+      setLoadingUnavailable(false);
+    });
 }, []);
+
 
 
 
@@ -205,6 +219,24 @@ const handleDeleteGift = async (giftId: number) => {
 };
 
 
+const handleWay = () => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      callUber(
+        "R. Cândida Rosa, 148, Campo Grande, Rio de Janeiro, 23017-340",
+        position.coords.latitude,
+        position.coords.longitude
+      );
+    },
+    (error) => {
+      console.warn('Erro ao obter localização:', error);
+      callUber("R. Cândida Rosa, 148, Campo Grande, Rio de Janeiro, 23017-340");
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+};
+
+
   const availableCount = filteredGifts.filter(gift => gift.available).length;
   const totalCount = filteredGifts.length;
   const availableGifts = giftsList.filter(gift => gift.available);
@@ -219,33 +251,53 @@ const handleDeleteGift = async (giftId: number) => {
             <h1 className="text-4xl font-bold text-cha-brown">Chá de Panela do Ruan & Marcelly</h1>
             <GiftIcon className="text-cha-terracota" size={32} />
           </div>
-          
-          <div className="bg-white p-6 rounded-2xl shadow-lg mb-6 border border-cha-sage/20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-cha-brown">
-              <div className="flex items-center justify-center gap-2">
-                <MapPin className="text-cha-terracota" size={20} />
-                <div className="text-sm">
-                  <div className="font-semibold">Local</div>
-                  <div>Rua Valdir Pequeno de Melo n° 70</div>
-                  <div>Lameirão Pequeno</div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-lg mb-6 border border-cha-sage/20">
+              <div className="flex flex-wrap justify-center gap-x-10 gap-y-6 text-cha-brown">
+
+                <div className="flex items-center gap-3 min-w-[250px] justify-center">
+                  <MapPin className="text-cha-terracota" size={20} />
+                  <div className="text-sm text-center md:text-left">
+                    <div className="font-semibold">Local</div>
+                    <div>Rua Valdir Pequeno de Melo n° 70</div>
+                    <div>Lameirão Pequeno</div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <Calendar className="text-cha-terracota" size={20} />
-                <div className="text-sm">
-                  <div className="font-semibold">Data</div>
-                  <div>30 de Novembro de 2025</div>
+
+                <div className="flex items-center gap-3 min-w-[250px] justify-center">
+                  <Calendar className="text-cha-terracota" size={20} />
+                  <div className="text-sm text-center md:text-left">
+                    <div className="font-semibold">Data</div>
+                    <div>30 de Novembro de 2025</div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <Clock className="text-cha-terracota" size={20} />
-                <div className="text-sm">
-                  <div className="font-semibold">Horário</div>
-                  <div>A partir das 13:00h</div>
+
+                <div className="flex items-center gap-3 min-w-[250px] justify-center">
+                  <Clock className="text-cha-terracota" size={20} />
+                  <div className="text-sm text-center md:text-left">
+                    <div className="font-semibold">Horário</div>
+                    <div>A partir das 13:00h</div>
+                  </div>
                 </div>
+
+                <div className="flex items-center gap-3 min-w-[250px] justify-center">
+                  <Car className="text-cha-terracota" size={20} />
+                  <div className="text-sm text-center md:text-left">
+                    <div className="font-semibold">Chamar Uber</div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-1 border-cha-sage text-cha-sage hover:bg-cha-sage/10"
+                      onClick={() => handleWay()}
+                    >
+                      Ir para o app
+                    </Button>
+                  </div>
+                </div>
+
               </div>
             </div>
-          </div>
+
 
           <p className="text-cha-brown text-lg">
             Escolha um presente especial para o casal
@@ -340,6 +392,9 @@ const handleDeleteGift = async (giftId: number) => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-4 max-h-96 overflow-y-auto">
+               {loadingAvailable ? (
+                  <Spinner />
+                ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {(selectedCategory === 'Indisponíveis' ? [] : 
                   selectedCategory === 'Disponíveis' ? availableGifts : 
@@ -364,6 +419,10 @@ const handleDeleteGift = async (giftId: number) => {
                   </div>
                 ))}
               </div>
+              )}
+
+
+
               {(selectedCategory === 'Indisponíveis' ? [] : 
                 selectedCategory === 'Disponíveis' ? availableGifts : 
                 selectedCategory === 'Todos' ? availableGifts : 
@@ -384,6 +443,10 @@ const handleDeleteGift = async (giftId: number) => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-4 max-h-96 overflow-y-auto">
+
+                {loadingUnavailable ? (
+                    <Spinner />
+                  ) : (
               <div className="space-y-3">
                 {(selectedCategory === 'Disponíveis' ? [] :
                   selectedCategory === 'Indisponíveis' ? unavailableGifts :
@@ -404,6 +467,8 @@ const handleDeleteGift = async (giftId: number) => {
                   </div>
                 ))}
               </div>
+              )}
+
               {(selectedCategory === 'Disponíveis' ? [] :
                 selectedCategory === 'Indisponíveis' ? unavailableGifts :
                 selectedCategory === 'Todos' ? unavailableGifts :
@@ -416,6 +481,7 @@ const handleDeleteGift = async (giftId: number) => {
             </CardContent>
           </Card>
         </div>
+        
       </div>
 
       <GiftSelectionModal
