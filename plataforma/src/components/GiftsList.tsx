@@ -31,7 +31,7 @@ const GiftsList = () => {
 
    useEffect(() => {
   console.log('🔄 Buscando lista de presentes...');
-  fetch('http://localhost:3000/gifts')
+  fetch(`${import.meta.env.VITE_PROD}/gifts`)
     .then(res => res.json())
     .then(data => {
       console.log('🎁 Lista de presentes carregada:', data);
@@ -68,7 +68,7 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
 
  const handleConfirmGift = async (giftId: number, name: string, whatsapp: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/gifts/${giftId}/choose`, {
+    const res = await fetch(`${import.meta.env.VITE_PROD}/gifts/${giftId}/choose`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, whatsapp })
@@ -130,7 +130,7 @@ _Mensagem enviada automaticamente pelo sistema de presentes._`;
 const handleAddGift = async (newGift: Omit<Gift, 'id'>) => {
   console.log('➕ Adicionando novo presente:', newGift);
   try {
-    const res = await fetch('http://localhost:3000/gifts', {
+    const res = await fetch(`${import.meta.env.VITE_PROD}/gifts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newGift)
@@ -153,7 +153,7 @@ const handleDeleteGift = async (giftId: number) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:3000/gifts/${giftId}`, {
+    const res = await fetch(`${import.meta.env.VITE_PROD}/gifts/${giftId}`, {
       method: 'DELETE'
     });
 
