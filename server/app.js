@@ -5,17 +5,16 @@ const sequelize = require('./config/database');
 const giftRoutes = require('./routes/gift.routes');
 const corsMiddleware = require('./middleware/cors.middleware');
 
-
 // Middlewares
 app.use(express.json());
 app.use(corsMiddleware); 
+
+// Rotas
 app.use('/gifts', giftRoutes); 
 
 // Conexão com o banco + sync
 sequelize.authenticate()
-  .then(() => {
-    return sequelize.sync(); 
-  })
+  .then(() => sequelize.sync())
   .then(() => {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {

@@ -1,13 +1,20 @@
-// middlewares/cors.middleware.js
-module.exports = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // ou '*' no dev
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+const cors = require('cors');
 
-  // Para pré-verificações de CORS (OPTIONS)
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
+const allowedOrigins = [
+  'http://localhost:8080',
+  'https://lista-gilt-eta.vercel.app'
+];
 
-  next();
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
+
+module.exports = cors(corsOptions);
