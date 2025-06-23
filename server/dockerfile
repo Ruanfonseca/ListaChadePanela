@@ -1,0 +1,18 @@
+# Dockerfile
+FROM node:20
+
+# Cria diretório da aplicação
+WORKDIR /app
+
+# Copia os arquivos
+COPY package*.json ./
+COPY . .
+
+# Instala dependências
+RUN npm install
+
+# Expõe a porta que a aplicação escuta
+EXPOSE 3000
+
+# Comando para rodar o app
+CMD ["node", "app.js"]
