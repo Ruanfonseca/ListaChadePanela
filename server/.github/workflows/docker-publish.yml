@@ -7,6 +7,9 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server  
 
     steps:
       - name: 🧾 Checkout do código
@@ -20,8 +23,8 @@ jobs:
 
       - name: 🛠️ Build da imagem Docker
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/lista:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/lista-chadepanela:latest .
 
-      - name: 🚀 Push da imagem para Docker Hub
+      - name: 🚀 Push da imagem
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/lista:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/lista-chadepanela:latest
