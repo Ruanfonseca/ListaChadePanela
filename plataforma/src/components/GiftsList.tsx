@@ -29,6 +29,9 @@ const GiftsList = () => {
   const [adminAction, setAdminAction] = useState<'add' | 'delete' | 'print' | null>(null);
   const [loadingAvailable, setLoadingAvailable] = useState(true);
   const [loadingUnavailable, setLoadingUnavailable] = useState(true);
+    const [loadingUber, setLoadingUber] = useState(false);
+
+ 
   const { toast } = useToast();
 
   const Spinner = () => (
@@ -220,8 +223,11 @@ const handleDeleteGift = async (giftId: number) => {
 
 
 const handleWay = () => {
+  setLoadingUber(true)
   navigator.geolocation.getCurrentPosition(
     (position) => {
+     setLoadingUber(false)
+
       callUber(
         "R. Cândida Rosa, 148, Campo Grande, Rio de Janeiro, 23017-340",
         position.coords.latitude,
@@ -231,6 +237,7 @@ const handleWay = () => {
     (error) => {
       console.warn('Erro ao obter localização:', error);
       callUber("R. Cândida Rosa, 148, Campo Grande, Rio de Janeiro, 23017-340");
+        setLoadingUber(false)
     },
     { enableHighAccuracy: true, timeout: 10000 }
   );
@@ -284,14 +291,23 @@ const handleWay = () => {
                   <Car className="text-cha-terracota" size={20} />
                   <div className="text-sm text-center md:text-left">
                     <div className="font-semibold">Chamar Uber</div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-1 border-cha-sage text-cha-sage hover:bg-cha-sage/10"
-                      onClick={() => handleWay()}
-                    >
-                      Ir para o app
-                    </Button>
+                    {!loadingUber ? (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="mt-1 border-cha-sage text-cha-sage hover:bg-cha-sage/10"
+                          onClick={() => handleWay()}
+                        >
+                          Ir para o app
+                        </Button>
+                      </>
+                    ):(
+                    <> 
+                     <Spinner />
+                    </>
+                  )}
+                    
                   </div>
                 </div>
 

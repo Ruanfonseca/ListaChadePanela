@@ -11,11 +11,9 @@ export function callUber(destinationAddress: string, userLatitude?: number, user
       ? `&pickup[latitude]=${userLatitude}&pickup[longitude]=${userLongitude}`
       : '');
 
-  // Tenta abrir o app Uber
- window.open(uberAppUrl);
+  window.location.href = uberAppUrl;
 
-  // Fallback: tenta abrir via navegador após 1.5s
   setTimeout(() => {
-    window.open(uberWebUrl, '_blank');
+    window.open(uberWebUrl, "_blank");
   }, 1500);
 }
