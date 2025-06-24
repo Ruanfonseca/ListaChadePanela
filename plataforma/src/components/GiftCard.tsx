@@ -15,14 +15,14 @@ const GiftCard: React.FC<GiftCardProps> = ({ gift, onChoose }) => {
         <div className="text-center mb-4">
           <div className="text-4xl mb-2">{gift.image}</div>
           <h3 className="font-semibold text-cha-brown text-lg mb-2">{gift.name}</h3>
-          <p className="text-cha-sage text-sm">{gift.category}</p>
+          <p className="text-cha-sage-dark text-sm">{gift.category}</p>
         </div>
         
         <div className="mt-4">
           {gift.available ? (
             <Button 
               onClick={() => onChoose(gift)}
-              className="w-full bg-cha-sage hover:bg-cha-sage/90 text-white font-medium py-2 rounded-lg transition-colors"
+              className="w-full bg-cha-sage-dark hover:bg-cha-sage-dark/90 text-white font-medium py-2 rounded-lg transition-colors"
             >
               Escolher
             </Button>

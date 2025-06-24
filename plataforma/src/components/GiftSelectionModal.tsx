@@ -59,7 +59,7 @@ const GiftSelectionModal: React.FC<GiftSelectionModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-md mx-auto bg-cha-beige border-cha-sage">
+      <DialogContent className="max-w-md mx-auto bg-cha-beige border-cha-sage-dark">
         <DialogHeader>
           <DialogTitle className="text-center text-cha-brown text-xl font-bold flex items-center justify-center gap-2">
             <Heart className="text-cha-terracota" size={24} />
@@ -69,10 +69,10 @@ const GiftSelectionModal: React.FC<GiftSelectionModalProps> = ({
         
         <div className="space-y-6">
           {/* Selected gift display */}
-          <div className="bg-white p-4 rounded-lg border border-cha-sage/30 text-center">
+          <div className="bg-white p-4 rounded-lg border border-cha-sage-dark/30 text-center">
             <div className="text-3xl mb-2">{gift.image}</div>
             <h3 className="font-semibold text-cha-brown">{gift.name}</h3>
-            <p className="text-cha-sage text-sm">{gift.category}</p>
+            <p className="text-cha-sage-dark text-sm">{gift.category}</p>
           </div>
 
           {/* Form */}
@@ -88,7 +88,7 @@ const GiftSelectionModal: React.FC<GiftSelectionModalProps> = ({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Digite seu nome completo"
-                className="border-cha-sage/50 focus:border-cha-sage"
+                className="border-cha-sage-dark/50 focus:border-cha-sage-dark"
                 required
               />
             </div>
@@ -104,7 +104,7 @@ const GiftSelectionModal: React.FC<GiftSelectionModalProps> = ({
                 value={whatsapp}
                 onChange={(e) => setWhatsapp(e.target.value)}
                 placeholder="(00) 00000-0000"
-                className="border-cha-sage/50 focus:border-cha-sage"
+                className="border-cha-sage-dark/50 focus:border-cha-sage-dark"
                 required
               />
             </div>
@@ -114,13 +114,13 @@ const GiftSelectionModal: React.FC<GiftSelectionModalProps> = ({
                 type="button"
                 variant="outline"
                 onClick={handleClose}
-                className="flex-1 border-cha-sage text-cha-brown hover:bg-cha-sage/10"
+                className="flex-1 border-cha-sage-dark text-cha-brown hover:bg-cha-sage-dark/10"
               >
                 Cancelar
               </Button>
               <Button
                 type="submit"
-                className="flex-1 bg-cha-sage hover:bg-cha-sage/90 text-white"
+                className="flex-1 bg-cha-sage-dark hover:bg-cha-sage-dark/90 text-white"
               >
                 Confirmar
               </Button>

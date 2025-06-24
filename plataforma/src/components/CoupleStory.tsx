@@ -35,22 +35,27 @@ const CoupleStory = () => {
         <div className="bg-cha-beige rounded-3xl p-8 md:p-12 shadow-2xl">
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Photos section */}
-            <div className="flex flex-col gap-4 md:w-1/3">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-cha-sage mx-auto">
-                <img 
-                  src="/lovable-uploads/46f8f8ab-50dd-40c2-b318-0f2bd55daaa5.png" 
-                  alt="Ruan e Marcelly" 
-                  className="w-full h-full object-cover"
-                />
+
+           <div className="flex flex-row md:flex-col gap-4 md:w-1/3 justify-center items-center">
+                {[ 
+                  "/lovable-uploads/46f8f8ab-50dd-40c2-b318-0f2bd55daaa5.png",
+                  "/lovable-uploads/59a52630-a680-4863-9370-07a3428f4f1d.png",
+                  "/lovable-uploads/foto-3.png"
+                ].map((src, index) => (
+                  <div
+                    key={index}
+                    className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-cha-terracota"
+                  >
+                    <img
+                      src={src}
+                      alt="Ruan e Marcelly"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-cha-terracota mx-auto">
-                <img 
-                  src="/lovable-uploads/59a52630-a680-4863-9370-07a3428f4f1d.png" 
-                  alt="Ruan e Marcelly" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+
+
             
             {/* Text content */}
             <div className="md:w-2/3 text-cha-brown">

@@ -29,14 +29,12 @@ const GiftsList = () => {
   const [adminAction, setAdminAction] = useState<'add' | 'delete' | 'print' | null>(null);
   const [loadingAvailable, setLoadingAvailable] = useState(true);
   const [loadingUnavailable, setLoadingUnavailable] = useState(true);
-    const [loadingUber, setLoadingUber] = useState(false);
-
- 
+  const [loadingUber, setLoadingUber] = useState(false);
   const { toast } = useToast();
-
+  
   const Spinner = () => (
   <div className="flex justify-center items-center py-10">
-    <div className="w-6 h-6 border-4 border-cha-sage border-t-transparent rounded-full animate-spin" />
+    <div className="w-6 h-6 border-4 border-cha-sage-dark border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
@@ -50,17 +48,17 @@ const GiftsList = () => {
 
 
    useEffect(() => {
-  fetch(`${import.meta.env.VITE_PROD}/gifts`)
-    .then(res => res.json())
-    .then(data => {
-      setGiftsList(data);
-    })
-    .catch(err => console.error('❌ Erro ao carregar presentes:', err))
-    .finally(() => {
-      setLoadingAvailable(false);
-      setLoadingUnavailable(false);
-    });
-}, []);
+      fetch(`${import.meta.env.VITE_PROD}/gifts`)
+        .then(res => res.json())
+        .then(data => {
+          setGiftsList(data);
+        })
+        .catch(err => console.error('❌ Erro ao carregar presentes:', err))
+        .finally(() => {
+          setLoadingAvailable(false);
+          setLoadingUnavailable(false);
+        });
+    }, []);
 
 
 
@@ -253,6 +251,7 @@ const handleWay = () => {
     <div className="min-h-screen bg-gradient-to-b from-cha-cream to-cha-beige py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          
           <div className="flex items-center justify-center gap-3 mb-4">
             <GiftIcon className="text-cha-terracota" size={32} />
             <h1 className="text-4xl font-bold text-cha-brown">Chá de Panela do Ruan & Marcelly</h1>
@@ -296,7 +295,7 @@ const handleWay = () => {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="mt-1 border-cha-sage text-cha-sage hover:bg-cha-sage/10"
+                          className="mt-1 border-cha-sage-dark text-cha-sage-dark hover:bg-cha-sage-dark/10"
                           onClick={() => handleWay()}
                         >
                           Ir para o app
@@ -313,20 +312,12 @@ const handleWay = () => {
 
               </div>
             </div>
-
-
-          <p className="text-cha-brown text-lg">
-            Escolha um presente especial para o casal
-          </p>
-          <div className="mt-4 text-cha-sage font-semibold">
-            {availableCount} de {totalCount} presentes disponíveis
-          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-8">
           <Button
             onClick={() => handleAdminAction('add')}
-            className="bg-cha-sage hover:bg-cha-sage/90 text-white flex items-center gap-2"
+            className="bg-cha-sage-dark hover:bg-cha-sage-dark/90 text-white flex items-center gap-2"
           >
             <Plus size={16} />
             Adicionar Presente
@@ -357,8 +348,8 @@ const handleWay = () => {
               variant={selectedCategory === category ? "default" : "outline"}
               className={`${
                 selectedCategory === category 
-                  ? 'bg-cha-sage hover:bg-cha-sage/90 text-white' 
-                  : 'border-cha-sage text-cha-sage hover:bg-cha-sage/10'
+                  ? 'bg-cha-sage-dark hover:bg-cha-sage-dark/90 text-white' 
+                  : 'border-cha-sage-dark text-cha-sage-dark hover:bg-cha-sage-dark/10'
               } transition-colors`}
             >
               {category}
@@ -399,9 +390,16 @@ const handleWay = () => {
           </div>
         </div>
 
+        <p className="flex justify-center text-cha-brown text-lg">
+            Escolha um presente especial para o casal
+          </p>
+          <div className="flex justify-center mt-4 mb-4 text-cha-sage-dark font-semibold">
+            {availableCount} de {totalCount} presentes disponíveis
+          </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card className="bg-white border-cha-sage shadow-lg">
-            <CardHeader className="bg-cha-sage/10 border-b border-cha-sage/20">
+          <Card className="bg-white border-cha-sage-dark shadow-lg">
+            <CardHeader className="bg-cha-sage-dark/10 border-b border-cha-sage-dark/20">
               <CardTitle className="text-cha-brown flex items-center gap-2">
                 <GiftIcon size={20} />
                 Presentes Disponíveis ({selectedCategory === 'Disponíveis' ? availableGifts.length : selectedCategory === 'Indisponíveis' ? 0 : availableGifts.length})
@@ -469,12 +467,12 @@ const handleWay = () => {
                   selectedCategory === 'Todos' ? unavailableGifts :
                   filteredGifts.filter(gift => !gift.available)
                 ).map(gift => (
-                  <div key={gift.id} className="bg-cha-beige/50 p-3 rounded-lg border border-cha-sage/20">
+                  <div key={gift.id} className="bg-cha-beige/50 p-3 rounded-lg border border-cha-sage-dark/20">
                     <div className="flex items-center gap-3">
                       <div className="text-2xl">{gift.image}</div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-cha-brown">{gift.name}</h4>
-                        <p className="text-sm text-cha-sage">Escolhido por: {gift.chosenBy}</p>
+                        <p className="text-sm text-cha-sage-dark">Escolhido por: {gift.chosenBy}</p>
                         {gift.chosenByWhatsApp && (
                           <p className="text-xs text-cha-brown">WhatsApp: (021) ----- ----</p>
                         )}
@@ -530,26 +528,27 @@ const handleWay = () => {
 
 
 
-       <footer className="mt-16 border-t border-cha-sage/20 pt-6 text-center text-sm text-cha-brown">
-            <p>
-              Com carinho, Ruan & Marcelly 💕
-            </p>
-            <p className="mt-1 text-cha-sage">
-              Sistema de Presentes | Desenvolvido com 💻 e ☕ por
-              <a
-                href="https://quedsoftoficial.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline ml-1 hover:text-cha-terracota transition-colors"
-              >
-                QuedSoft
-              </a>
-            </p>
-            <p className="mt-1 text-cha-sage">CNPJ: 57.384.148/0001-94</p>
-            <p className="mt-1">
-              © {new Date().getFullYear()} Todos os direitos reservados
-            </p>
-          </footer>
+       <footer className="mt-16 border-t border-cha-sage-dark/20 pt-6 text-center text-sm text-cha-brown">
+              <p>
+                Com carinho, Ruan & Marcelly 💕
+              </p>
+              <p className="mt-1 text-cha-sage-dark">
+                Sistema de Presentes | Desenvolvido com 💻 e ☕ por
+                <a
+                  href="https://quedsoftoficial.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline ml-1 hover:text-cha-terracota transition-colors"
+                >
+                  QuedSoft
+                </a>
+              </p>
+              <p className="mt-1 text-cha-sage-dark">CNPJ: 57.384.148/0001-94</p>
+              <p className="mt-1">
+                © {new Date().getFullYear()} Todos os direitos reservados
+              </p>
+            </footer>
+
 
 
     </div>

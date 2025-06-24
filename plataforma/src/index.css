@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Design system: define tokens globais de cores, gradientes, fontes, etc */
 
 @layer base {
   :root {
@@ -37,19 +37,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -81,6 +74,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -89,6 +83,61 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .cha-sage {
+    --background: 93 20% 95%;
+    --foreground: 93 10% 20%;
+
+    --card: 93 20% 97%;
+    --card-foreground: 93 10% 20%;
+
+    --primary: 93 20% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --muted: 93 10% 85%;
+    --muted-foreground: 93 10% 25%;
+
+    --accent: 93 20% 70%;
+    --accent-foreground: 93 10% 20%;
+  }
+
+  .cha-beige {
+    --background: 30 60% 95%;
+    --foreground: 30 30% 20%;
+
+    --card: 30 60% 97%;
+    --card-foreground: 30 30% 20%;
+
+    --primary: 30 70% 80%;
+    --primary-foreground: 0 0% 0%;
+
+    --muted: 30 40% 90%;
+    --muted-foreground: 30 30% 25%;
+  }
+
+  .cha-brown {
+    --background: 30 40% 90%;
+    --foreground: 30 60% 15%;
+
+    --primary: 30 80% 25%;
+    --primary-foreground: 0 0% 100%;
+  }
+
+  .cha-cream {
+    --background: 44 100% 96%;
+    --foreground: 30 60% 20%;
+
+    --primary: 44 60% 80%;
+    --primary-foreground: 0 0% 0%;
+  }
+
+  .cha-terracota {
+    --background: 18 70% 90%;
+    --foreground: 18 80% 25%;
+
+    --primary: 18 80% 45%;
+    --primary-foreground: 0 0% 100%;
   }
 }
 

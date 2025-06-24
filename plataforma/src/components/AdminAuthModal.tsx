@@ -44,7 +44,7 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-md mx-auto bg-cha-beige border-cha-sage">
+      <DialogContent className="max-w-md mx-auto bg-cha-beige border-cha-sage-dark">
         <DialogHeader>
           <DialogTitle className="text-center text-cha-brown text-xl font-bold flex items-center justify-center gap-2">
             <Lock className="text-cha-terracota" size={24} />
@@ -63,7 +63,7 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Senha de administrador"
-              className="border-cha-sage/50 focus:border-cha-sage mt-2"
+              className="border-cha-sage-dark/50 focus:border-cha-sage-dark mt-2"
               required
             />
           </div>
@@ -73,13 +73,13 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
               type="button"
               variant="outline"
               onClick={handleClose}
-              className="flex-1 border-cha-sage text-cha-brown hover:bg-cha-sage/10"
+              className="flex-1 border-cha-sage-dark text-cha-brown hover:bg-cha-sage-dark/10"
             >
               Cancelar
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-cha-sage hover:bg-cha-sage/90 text-white"
+              className="flex-1 bg-cha-sage-dark hover:bg-cha-sage-dark/90 text-white"
             >
               Entrar
             </Button>
