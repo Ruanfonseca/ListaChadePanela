@@ -265,7 +265,7 @@ const handleWay = () => {
                   <MapPin className="text-cha-terracota" size={20} />
                   <div className="text-sm text-center md:text-left">
                     <div className="font-semibold">Local</div>
-                    <div>Rua Valdir Pequeno de Melo n° 70</div>
+                    <div>R. Cândida Rosa, 148, Campo Grande, Rio de Janeiro, 23017-340(rua do antigo sítio alegre)</div>
                     <div>Lameirão Pequeno</div>
                   </div>
                 </div>
