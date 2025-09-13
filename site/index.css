@@ -1,0 +1,420 @@
+/* Reset body and html */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+}
+
+/* Hero image */
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./img/imagemFundo.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hero text */
+.hero-text {
+  text-align: center;
+  color: white;
+}
+
+/* Logo */
+.hero-logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+/* Title */
+.title-gulzar {
+  font-family: "Gulzar", serif;
+  font-weight: 400;
+  font-size: 130px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  color: #f57c00;
+}
+
+/* Subtitle */
+.subtitle-greatvibes {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  margin: 15px 0 5px 0;
+  color: #fff;
+}
+
+/* Date */
+.date-gulzar {
+  font-family: "Gulzar", serif;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* ======= Nossa História ======= */
+.firstsection {
+  background-color: #fff8e7; /* bege suave */
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.section-title {
+  font-family: "Gulzar", serif;
+  font-weight: 400;
+  font-size: 70px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  color: #ee7a13;
+}
+
+.section-text {
+  font-family: "Montserrat", serif;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  color: #844309;
+}
+
+/* Imagens */
+.images {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.images img {
+  width: 250px;
+  height: auto;
+  border: 4px solid #5a3a2e; /* marrom */
+  border-radius: 5px;
+}
+
+/* ======= Lista de Presentes ======= */
+.secondsection {
+  background-color: #7b3f00; /* marrom */
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.second-title {
+  font-family: "Gulzar", serif;
+  font-size: 2.5rem;
+  color: #f57c00;
+  margin-bottom: 20px;
+}
+
+.second-text {
+  font-family: "Montserrat", serif;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  color: #fffadd;
+}
+
+/* Paleta de cores */
+.palette {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.cor {
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.cor span {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  border: 3px solid #fff;
+}
+
+/* Inspirações */
+.inspiracoes {
+  margin-top: 30px;
+}
+
+.inspiracoes h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f57c00;
+  margin-bottom: 20px;
+}
+
+.opcoes img {
+  max-width: 600px;
+  width: 100%;
+  border: 5px solid #f57c00;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+/* Botão */
+.btn-lista {
+  background-color: #f57c00;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-lista:hover {
+  background-color: #d66c00;
+}
+
+/* ======= Vista-se com a nossa paleta ======= */
+.thirdsection {
+  background-color: #fff8e7; /* bege clarinho */
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.third-title {
+  font-family: "Gulzar", serif;
+  font-size: 2.3rem;
+  color: #ee7a13;
+  margin-bottom: 15px;
+}
+
+.third-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+  color: #5a3a2e;
+}
+
+/* Paleta de cores */
+.thirdsection .palette {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.thirdsection .cor {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  color: #5a3a2e;
+}
+
+.thirdsection .cor span {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  border: 3px solid #ddd;
+}
+/* ======= Footer ======= */
+.footer {
+  background-color: #7b3f00; /* marrom */
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 0;
+}
+
+.footer p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  color: #fffadd;
+  margin: 0;
+}
+
+.footer .heart {
+  color: #ee7a13; /* laranja da paleta */
+  font-size: 1.2rem;
+  margin-left: 5px;
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+/* 📱 Celulares */
+@media (max-width: 600px) {
+  .title-gulzar {
+    font-size: 60px;
+  }
+
+  .subtitle-greatvibes {
+    font-size: 1.5rem;
+  }
+
+  .date-gulzar {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 35px;
+  }
+
+  .section-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .images img {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .second-title {
+    font-size: 1.8rem;
+  }
+
+  .second-text {
+    font-size: 18px;
+  }
+
+  .btn-lista {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+  }
+
+  .third-title {
+    font-size: 1.6rem;
+  }
+
+  .third-text {
+    font-size: 1rem;
+  }
+
+  .thirdsection .palette {
+    gap: 30px;
+  }
+
+  .thirdsection .cor span {
+    width: 50px;
+    height: 50px;
+  }
+  .palette {
+    flex-wrap: nowrap; /* não deixa quebrar */
+    overflow-x: auto; /* cria rolagem lateral se não couber */
+    justify-content: flex-start; /* alinha à esquerda */
+    gap: 20px; /* espaço menor entre os itens */
+  }
+
+  .cor {
+    flex: 0 0 auto; /* impede de esticar */
+  }
+}
+
+/* 📲 Tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .title-gulzar {
+    font-size: 90px;
+  }
+
+  .section-title {
+    font-size: 50px;
+  }
+
+  .section-text {
+    font-size: 20px;
+  }
+
+  .images img {
+    width: 200px;
+  }
+
+  .second-title {
+    font-size: 2rem;
+  }
+
+  .second-text {
+    font-size: 20px;
+  }
+
+  .third-title {
+    font-size: 2rem;
+  }
+
+  .third-text {
+    font-size: 1.1rem;
+  }
+
+  .thirdsection .palette {
+    gap: 40px;
+  }
+
+  .thirdsection .cor span {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* 🖥️ Desktop */
+@media (min-width: 1025px) {
+  .title-gulzar {
+    font-size: 130px;
+  }
+
+  .section-title {
+    font-size: 70px;
+  }
+
+  .section-text {
+    font-size: 25px;
+  }
+
+  .images img {
+    width: 250px;
+  }
+
+  .second-title {
+    font-size: 2.5rem;
+  }
+
+  .second-text {
+    font-size: 25px;
+  }
+
+  .third-title {
+    font-size: 2.3rem;
+  }
+
+  .third-text {
+    font-size: 1.2rem;
+  }
+
+  .thirdsection .palette {
+    gap: 60px;
+  }
+
+  .thirdsection .cor span {
+    width: 70px;
+    height: 70px;
+  }
+}
