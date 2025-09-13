@@ -19,7 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { categories, Gift } from "@/data/gifts";
 import ModalInfo from "./ModalInfo";
 import { callUber } from "@/service/uber";
-
+import amadeirado from "@/assets/amadeirado.jpg";
 const GiftsList = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showInfoModal, setShowInfoModal] = useState(true);
@@ -293,7 +293,7 @@ const GiftsList = () => {
                 <Clock className="text-cha-terracota" size={20} />
                 <div className="text-sm text-center md:text-left">
                   <div className="font-semibold">Horário</div>
-                  <div>A partir das 13:00h</div>
+                  <div>A partir das 18:00h</div>
                 </div>
               </div>
 
@@ -374,27 +374,24 @@ const GiftsList = () => {
           </p>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-cha-sage rounded-full border-2 border-white"></div>
-              <span>Verde</span>
-            </div>
-            <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-cha-beige rounded-full border-2 border-white"></div>
               <span>Bege</span>
             </div>
+
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-cha-terracota rounded-full border-2 border-white"></div>
-              <span>Terracota</span>
+              <div className="w-8 h-8 bg-cha-sage rounded-full border-2 border-white"></div>
+              <span>Verde</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-amber-600 rounded-full border-2 border-white"></div>
-              <span>Marrom</span>
-            </div>
+
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-white rounded-full border-2 border-gray-300"></div>
               <span>Branco</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-amber-100 rounded-full border-2 border-white"></div>
+              <img
+                className="w-8 h-8 bg-amber-100 rounded-full border-2 border-white"
+                src={amadeirado}
+              />
               <span>Amadeirado</span>
             </div>
           </div>
