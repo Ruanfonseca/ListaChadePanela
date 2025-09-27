@@ -1,4 +1,4 @@
-const Gift = require('../models/gift.model');
+const Gift = require("../models/gift.model");
 
 // GET /gifts
 exports.getAllGifts = async (req, res) => {
@@ -16,7 +16,7 @@ exports.createGift = async (req, res) => {
 exports.chooseGift = async (req, res) => {
   const { name, whatsapp } = req.body;
   const gift = await Gift.findByPk(req.params.id);
-  if (!gift) return res.status(404).json({ error: 'Gift not found' });
+  if (!gift) return res.status(404).json({ error: "Gift not found" });
 
   gift.available = false;
   gift.chosenBy = name;
@@ -29,6 +29,6 @@ exports.chooseGift = async (req, res) => {
 // DELETE /gifts/:id
 exports.deleteGift = async (req, res) => {
   const deleted = await Gift.destroy({ where: { id: req.params.id } });
-  if (!deleted) return res.status(404).json({ error: 'Gift not found' });
-  res.json({ message: 'Gift deleted' });
+  if (!deleted) return res.status(404).json({ error: "Gift not found" });
+  res.json({ message: "Gift deleted" });
 };
