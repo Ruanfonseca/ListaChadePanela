@@ -1,5 +1,5 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React from "react";
+import { X } from "lucide-react";
 
 interface ModalInfoProps {
   isOpen: boolean;
@@ -7,12 +7,16 @@ interface ModalInfoProps {
   onConfirm: () => void;
 }
 
-export default function ModalInfo({ isOpen, onClose, onConfirm }: ModalInfoProps) {
+export default function ModalInfo({
+  isOpen,
+  onClose,
+  onConfirm,
+}: ModalInfoProps) {
   if (!isOpen) return null;
 
   const handleConfirm = () => {
-    onConfirm();   
-    onClose();    
+    onConfirm();
+    onClose();
   };
 
   return (
@@ -26,7 +30,7 @@ export default function ModalInfo({ isOpen, onClose, onConfirm }: ModalInfoProps
         </button>
 
         <h2 className="text-cha-brown text-xl font-bold mb-4 text-center">
-          Aviso Importante
+          Avisos Importante
         </h2>
 
         {/* Body */}
@@ -34,6 +38,10 @@ export default function ModalInfo({ isOpen, onClose, onConfirm }: ModalInfoProps
           <p>
             Ao escolher um presente, ele será marcado como indisponível para os
             demais convidados.
+          </p>
+          <p>
+            Alguns presentes tem uma repetição, basta escolher um e digitar as
+            informações solicitadas.
           </p>
           <p>
             Essa escolha é <span className="font-semibold">definitiva</span>,
