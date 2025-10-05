@@ -262,7 +262,7 @@ const GiftsList = () => {
           <div className="flex items-center justify-center gap-3 mb-4">
             <GiftIcon className="text-cha-terracota" size={32} />
             <h1 className="text-4xl font-bold text-cha-brown">
-              Chá de Panela do Ruan & Marcelly
+              Chá de Bençãos do Ruan & Marcelly
             </h1>
             <GiftIcon className="text-cha-terracota" size={32} />
           </div>
@@ -349,7 +349,7 @@ const GiftsList = () => {
           </Button>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        {/* <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((category) => (
             <Button
               key={category}
@@ -364,9 +364,9 @@ const GiftsList = () => {
               {category}
             </Button>
           ))}
-        </div>
+        </div> */}
 
-        <div className="bg-cha-brown text-white p-6 rounded-2xl mb-8 shadow-lg">
+        {/* <div className="bg-cha-brown text-white p-6 rounded-2xl mb-8 shadow-lg">
           <h3 className="text-xl font-bold mb-4">Paleta de cores</h3>
           <p className="mb-4">
             Ah! Nosso enxoval será nas cores abaixo, então, se você considerar
@@ -395,11 +395,11 @@ const GiftsList = () => {
               <span>Amadeirado</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <p className="flex justify-center text-cha-brown text-lg">
+        {/* <p className="flex justify-center text-cha-brown text-lg">
           Escolha um presente especial para o casal
-        </p>
+        </p> */}
         <div className="flex justify-center mt-4 mb-4 text-cha-sage-dark font-semibold">
           {availableCount} de {totalCount} presentes disponíveis
         </div>
