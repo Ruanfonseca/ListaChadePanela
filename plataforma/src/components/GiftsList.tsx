@@ -77,7 +77,7 @@ const GiftsList = () => {
   };
 
   const sendWhatsAppMessage = (gift: Gift, name: string, whatsapp: string) => {
-    const message = `🎁 *Novo presente escolhido para o Chá de Panela do Ruan & Marcelly!*
+    const message = `*Novo presente escolhido para o Chá de Panela do Ruan & Marcelly!*
 
       *Presente:* ${gift.name}
       *Escolhido por:* ${name}
@@ -87,7 +87,7 @@ const GiftsList = () => {
       _Mensagem enviada automaticamente pelo sistema de presentes._`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/5521969232991?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/5521984389640?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
   };
