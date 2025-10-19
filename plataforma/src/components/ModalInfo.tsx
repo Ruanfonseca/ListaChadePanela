@@ -36,12 +36,13 @@ export default function ModalInfo({
         {/* Body */}
         <div className="text-cha-brown text-sm space-y-3">
           <p>
-            Ao escolher um presente, ele será marcado como indisponível para os
-            demais convidados.
+            Caso prefira, você também pode contribuir com o valor do presente
+            via Pix. A chave é: 150.978.737-26 PicPay Marcelly Laís Gonzaga de
+            Oliveira
           </p>
           <p>
-            Alguns presentes tem uma repetição, basta escolher um e digitar as
-            informações solicitadas.
+            Ao escolher um presente, ele será marcado como indisponível para os
+            demais convidados.
           </p>
           <p>
             Essa escolha é <span className="font-semibold">definitiva</span>,
