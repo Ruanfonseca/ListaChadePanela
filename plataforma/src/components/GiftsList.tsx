@@ -20,6 +20,7 @@ import { categories, Gift } from "@/data/gifts";
 import ModalInfo from "./ModalInfo";
 import { callUber } from "@/service/uber";
 import amadeirado from "@/assets/amadeirado.jpg";
+
 const GiftsList = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showInfoModal, setShowInfoModal] = useState(true);
@@ -457,7 +458,8 @@ const GiftsList = () => {
                 : filteredGifts.filter((gift) => gift.available)
               ).length === 0 && (
                 <p className="text-center text-cha-brown py-8">
-                  Nenhum presente disponível no momento.
+                  Aguarde uns instantes,estamos carregando a lista de presentes
+                  para você.
                 </p>
               )}
             </CardContent>
@@ -523,7 +525,7 @@ const GiftsList = () => {
                 : filteredGifts.filter((gift) => !gift.available)
               ).length === 0 && (
                 <p className="text-center text-cha-brown py-8">
-                  Nenhum presente foi escolhido ainda.
+                  Só um momento,estou buscando a lista de presentes.
                 </p>
               )}
             </CardContent>
